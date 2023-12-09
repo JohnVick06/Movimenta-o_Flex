@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles.css">
+  <title>Movimentação com Flexbox</title>
+</head>
+<body>
+
+  <div class="flex-container">
+    <div class="movable-element">mexa</div>
+  </div>
+
+  <script>
+    function tornarMovivel(elemento) {
+      let offsetX, offsetY, isDragging = false;
+  
+      elemento.addEventListener('mousedown', (e) => {
+        isDragging = true;
+        offsetX = e.clientX - elemento.getBoundingClientRect().left;
+        offsetY = e.clientY - elemento.getBoundingClientRect().top;
+      });
+  
+      document.addEventListener('mousemove', (e) => {
+        if (isDragging) {
+          const x = e.clientX - offsetX;
+          const y = e.clientY - offsetY;
+  
+          elemento.style.left = `${x}px`;
+          elemento.style.top = `${y}px`;
+        }
+      });
+ 
+      document.addEventListener('mouseup', () => {
+        isDragging = false;
+      });
+    }
+
+    const movableElement = document.querySelector('.movable-element');
+    tornarMovivel(movableElement);
+  </script>
+
+</body>
+</html>
